@@ -1,0 +1,14 @@
+{
+  "$schema": "boilerplate.schema.json",
+  "boilerplate": "@mufan/code-boilerplates/typescript",
+  "options": {
+    "name": "windows-matter",
+    "license": "MIT",
+    "author": "vilicvane",
+    "projects": [
+      {
+        "name": "program"
+      }
+    ]
+  }
+}
