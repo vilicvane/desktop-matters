@@ -5,6 +5,7 @@
     "name": "windows-matter",
     "license": "MIT",
     "author": "vilicvane",
+    "packageManager": "pnpm",
     "projects": [
       {
         "name": "program"
