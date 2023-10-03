@@ -4,7 +4,7 @@ import {StorageBackendDisk} from '@project-chip/matter-node.js/storage';
 import {MatterServer} from '@project-chip/matter.js';
 import {StorageManager} from '@project-chip/matter.js/storage';
 
-import {WindowsDeviceNode} from './windows-device-node';
+import {WindowsDeviceNode} from '../library';
 
 const storageManager = new StorageManager(new StorageBackendDisk('.storage'));
 

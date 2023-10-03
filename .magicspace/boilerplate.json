@@ -10,6 +10,11 @@
       {
         "name": "library",
         "module": "esm"
+      },
+      {
+        "name": "cli",
+        "module": "esm",
+        "references": ["library"]
       }
     ]
   }
