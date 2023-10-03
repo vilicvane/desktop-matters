@@ -2,7 +2,7 @@
   "$schema": "boilerplate.schema.json",
   "boilerplate": "@mufan/code-boilerplates/typescript",
   "options": {
-    "name": "windows-matter",
+    "name": "desktop-matters",
     "license": "MIT",
     "author": "vilicvane",
     "packageManager": "pnpm",

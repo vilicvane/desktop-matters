@@ -1,4 +1,4 @@
-# windows-matter
+# desktop-matters
 
 Just another awesome magic.
 
