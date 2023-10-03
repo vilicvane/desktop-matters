@@ -8,12 +8,10 @@
     "packageManager": "pnpm",
     "projects": [
       {
-        "name": "library",
-        "module": "esm"
+        "name": "library"
       },
       {
         "name": "cli",
-        "module": "esm",
         "references": ["library"]
       }
     ]
