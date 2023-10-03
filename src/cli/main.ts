@@ -1,4 +1,3 @@
-import {randomInt} from 'crypto';
 import {setTimeout} from 'timers/promises';
 
 import '@project-chip/matter-node.js';
@@ -10,7 +9,12 @@ import {Level, Logger} from '@project-chip/matter.js/log';
 import {StorageManager} from '@project-chip/matter.js/storage';
 import {SIGNAL, main} from 'main-function';
 
-import {DesktopNode, generatePassCode} from '../library';
+import {
+  DesktopNode,
+  generateDiscriminator,
+  generatePassCode,
+  generateSerialNumber,
+} from '../library';
 
 Logger.defaultLogLevel = Level.INFO;
 
@@ -35,13 +39,11 @@ main(async () => {
   const passcode = desktopDeviceContext.get('passcode', generatePassCode());
   const discriminator = desktopDeviceContext.get(
     'discriminator',
-    randomInt(0, 0xfff + 1),
+    generateDiscriminator(),
   );
   const serialNumber = desktopDeviceContext.get(
     'serialNumber',
-    `desktop-${randomInt(0, 10 ** 8)
-      .toString()
-      .padStart(8, '0')}`,
+    generateSerialNumber('desktop'),
   );
 
   if (
@@ -61,11 +63,6 @@ main(async () => {
   });
 
   await windowsDeviceNode.addToMatterServer(matterServer);
-
-  windowsDeviceNode.commissioningServer.addCommandHandler(
-    'testEventTrigger',
-    () => {},
-  );
 
   await matterServer.start();
 
