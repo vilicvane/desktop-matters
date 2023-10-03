@@ -11,11 +11,15 @@
     "test": "pnpm lint-prettier && pnpm build && pnpm lint"
   },
   "dependencies": {
+    "@project-chip/matter-node.js": "^0.5.0",
+    "@project-chip/matter.js": "^0.5.0",
+    "lock-your-windows": "^0.0.2",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@mufan/code": "^0.2.17",
     "@mufan/eslint-plugin": "^0.1.82",
+    "@types/node": "^20.8.0",
     "eslint": "^8.50.0",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
