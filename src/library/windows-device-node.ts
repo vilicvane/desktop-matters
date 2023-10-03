@@ -1,11 +1,8 @@
-import {randomInt} from 'crypto';
-
 import type {MatterServer} from '@project-chip/matter.js';
 import {CommissioningServer} from '@project-chip/matter.js';
 import {DeviceTypeId} from '@project-chip/matter.js/datatype';
 
 import {VENDOR_ID, VENDOR_NAME} from './@constants';
-import {generatePassCode} from './@utils';
 import {WindowsDevice} from './windows-device';
 
 export interface WindowsDeviceNodeOptions {
@@ -14,11 +11,12 @@ export interface WindowsDeviceNodeOptions {
    * 16 bits.
    */
   productId?: number;
-  passcode?: number;
+  passcode: number;
   /**
    * 12 bits.
    */
-  discriminator?: number;
+  discriminator: number;
+  serialNumber: string;
   port?: number;
 }
 
@@ -30,11 +28,12 @@ export class WindowsDeviceNode {
   constructor({
     name = 'Windows Device',
     productId = 0x0001,
-    passcode = generatePassCode(),
-    discriminator = randomInt(1, 0xfff + 1),
+    passcode,
+    discriminator,
+    serialNumber,
     port = 5540,
-  }: WindowsDeviceNodeOptions = {}) {
-    this.device = new WindowsDevice(VENDOR_ID * 0x10000 + productId);
+  }: WindowsDeviceNodeOptions) {
+    this.device = new WindowsDevice();
 
     this.commissioningServer = new CommissioningServer({
       port,
@@ -46,7 +45,9 @@ export class WindowsDeviceNode {
         vendorName: VENDOR_NAME,
         vendorId: VENDOR_ID,
         productName: 'Windows Device',
+        productLabel: 'Windows Device',
         productId,
+        serialNumber,
       },
     });
 
@@ -55,15 +56,22 @@ export class WindowsDeviceNode {
 
   addToMatterServer(matterServer: MatterServer): void {
     matterServer.addCommissioningServer(this.commissioningServer);
+  }
 
+  printPairingCodeIfNotPaired(): void {
     if (!this.commissioningServer.isCommissioned()) {
       this.printPairingCode();
     }
   }
 
   private printPairingCode(): void {
-    const {qrCode, manualPairingCode} =
-      this.commissioningServer.getPairingCode();
+    const {qrCode, manualPairingCode} = this.commissioningServer.getPairingCode(
+      {
+        ble: false,
+        onIpNetwork: true,
+        softAccessPoint: false,
+      },
+    );
 
     console.info(qrCode);
     console.info(`Manual pairing code: ${manualPairingCode}`);

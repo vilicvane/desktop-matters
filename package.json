@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "author": "vilicvane",
-  "type": "module",
   "exports": {
     "types": "./bld/library/index.d.ts",
     "require": "./bld/library/index.js",
     "default": "./bld/library/index.js"
   },
+  "bin": "./bld/library/cli.js",
   "scripts": {
     "3": "pnpm install && pnpm dedupe && pnpm install",
     "build": "rimraf ./bld && tsc --build",
@@ -20,6 +20,7 @@
     "@project-chip/matter-node.js": "^0.5.0",
     "@project-chip/matter.js": "^0.5.0",
     "lock-your-windows": "^0.0.2",
+    "main-function": "^0.1.7",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
