@@ -1,7 +1,7 @@
 {
   "references": [
     {
-      "path": "src/program"
+      "path": "src/library"
     }
   ],
   "files": []

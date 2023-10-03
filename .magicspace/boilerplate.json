@@ -8,7 +8,8 @@
     "packageManager": "pnpm",
     "projects": [
       {
-        "name": "program"
+        "name": "library",
+        "module": "esm"
       }
     ]
   }
