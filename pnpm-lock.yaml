@@ -4,10 +4,15 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@project-chip/matter-node.js@0.5.0':
+    hash: afujq46dozj4rgymknffo4mqvm
+    path: patches/@project-chip__matter-node.js@0.5.0.patch
+
 dependencies:
   '@project-chip/matter-node.js':
     specifier: ^0.5.0
-    version: 0.5.0
+    version: 0.5.0(patch_hash=afujq46dozj4rgymknffo4mqvm)
   '@project-chip/matter.js':
     specifier: ^0.5.0
     version: 0.5.0
@@ -184,13 +189,14 @@ packages:
     dev: true
     optional: true
 
-  /@project-chip/matter-node.js@0.5.0:
+  /@project-chip/matter-node.js@0.5.0(patch_hash=afujq46dozj4rgymknffo4mqvm):
     resolution: {integrity: sha512-IfxgOX0bzzyLYCpSoCuB1AdmOzBLJgdq9pQmn2WdJkJe/+NEl9YnB9iZsEO4gX5d88txNTR+jbn4ScH2rwJP1Q==}
     engines: {_comment: For Crypto.hkdf support, node: '>=16.0.0'}
     dependencies:
       '@project-chip/matter.js': 0.5.0
       node-localstorage: 3.0.5
     dev: false
+    patched: true
 
   /@project-chip/matter.js@0.5.0:
     resolution: {integrity: sha512-htD1nXGCS77h0s2XaL0DXFuxXC0wCuSBCtrLRVylWrImflMnsIric9aX1sFLyRbYMbrWWJT3fzHTUoKYAgvw7A==}

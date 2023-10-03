@@ -1,0 +1,41 @@
+diff --git a/dist/net/NetworkNode.js b/dist/net/NetworkNode.js
+index a6be9662c7ccea72a0a6cd25f7ed8c046258c4a3..78348271b40e9d3f0d9877943f91d11e7d4607ae 100644
+--- a/dist/net/NetworkNode.js
++++ b/dist/net/NetworkNode.js
+@@ -22,19 +22,26 @@ const os_1 = require("os");
+ const UdpChannelNode_1 = require("./UdpChannelNode");
+ class NetworkNode extends net_1.Network {
+     static getMulticastInterface(netInterface, ipv4) {
++        const netInterfaceInfo = (0, os_1.networkInterfaces)()[netInterface];
++        if (netInterfaceInfo === void 0)
++          throw new net_1.NetworkError(`Unknown interface: ${netInterface}`);
+         if (ipv4) {
+-            const netInterfaceInfo = (0, os_1.networkInterfaces)()[netInterface];
+-            if (netInterfaceInfo === undefined)
+-                throw new net_1.NetworkError(`Unknown interface: ${netInterface}`);
+-            for (const { address, family } of netInterfaceInfo) {
+-                if (family === "IPv4") {
+-                    return address;
+-                }
++          for (const { address, family } of netInterfaceInfo) {
++            if (family === "IPv4") {
++              return address;
+             }
+-            throw new net_1.NetworkError(`No IPv4 addresses on interface: ${netInterface}`);
+-        }
+-        else {
++          }
++          throw new net_1.NetworkError(`No IPv4 addresses on interface: ${netInterface}`);
++        } else {
++          if (process.platform !== "win32") {
+             return `::%${netInterface}`;
++          }
++          for (const { address, family, scopeid } of netInterfaceInfo) {
++            if (family === "IPv6" && address.startsWith("fe80::")) {
++              return `::%${scopeid}`;
++            }
++          }
++          throw new net_1.NetworkError(`No IPv6 addresses on interface: ${netInterface}`);
+         }
+     }
+     static getNetInterfaceForIp(ip) {
