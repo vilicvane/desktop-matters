@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import {setTimeout} from 'timers/promises';
 
 import '@project-chip/matter-node.js';
@@ -7,7 +9,7 @@ import {hasParameter} from '@project-chip/matter-node.js/util';
 import {MatterServer} from '@project-chip/matter.js';
 import {Level, Logger} from '@project-chip/matter.js/log';
 import {StorageManager} from '@project-chip/matter.js/storage';
-import {SIGNAL, main} from 'main-function';
+import main, {SIGNAL} from 'main-function';
 
 import {
   DesktopNode,
