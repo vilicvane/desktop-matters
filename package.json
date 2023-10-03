@@ -5,7 +5,7 @@
   "author": "vilicvane",
   "exports": {
     "types": "./bld/library/index.d.ts",
-    "import": "./bld/library/index.js",
+    "require": "./bld/library/index.js",
     "default": "./bld/library/index.js"
   },
   "scripts": {
