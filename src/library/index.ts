@@ -1,3 +1,3 @@
-export * from './windows-device-node';
-export * from './windows-device';
+export * from './desktop-device-node';
+export * from './windows-screen';
 export * from './utils';

@@ -10,7 +10,7 @@ import {Level, Logger} from '@project-chip/matter.js/log';
 import {StorageManager} from '@project-chip/matter.js/storage';
 import {SIGNAL, main} from 'main-function';
 
-import {WindowsDeviceNode, generatePassCode} from '../library';
+import {DesktopNode, generatePassCode} from '../library';
 
 Logger.defaultLogLevel = Level.INFO;
 
@@ -30,31 +30,31 @@ main(async () => {
 
   const matterServer = new MatterServer(storageManager);
 
-  const windowsDeviceContext = storageManager.createContext('windows-device');
+  const desktopDeviceContext = storageManager.createContext('desktop-device');
 
-  const passcode = windowsDeviceContext.get('passcode', generatePassCode());
-  const discriminator = windowsDeviceContext.get(
+  const passcode = desktopDeviceContext.get('passcode', generatePassCode());
+  const discriminator = desktopDeviceContext.get(
     'discriminator',
     randomInt(0, 0xfff + 1),
   );
-  const serialNumber = windowsDeviceContext.get(
+  const serialNumber = desktopDeviceContext.get(
     'serialNumber',
-    `windows-device-${randomInt(0, 10 ** 8)
+    `desktop-${randomInt(0, 10 ** 8)
       .toString()
       .padStart(8, '0')}`,
   );
 
   if (
-    !windowsDeviceContext.has('passcode') ||
-    !windowsDeviceContext.has('discriminator') ||
-    !windowsDeviceContext.has('serialNumber')
+    !desktopDeviceContext.has('passcode') ||
+    !desktopDeviceContext.has('discriminator') ||
+    !desktopDeviceContext.has('serialNumber')
   ) {
-    windowsDeviceContext.set('passcode', passcode);
-    windowsDeviceContext.set('discriminator', discriminator);
-    windowsDeviceContext.set('serialNumber', serialNumber);
+    desktopDeviceContext.set('passcode', passcode);
+    desktopDeviceContext.set('discriminator', discriminator);
+    desktopDeviceContext.set('serialNumber', serialNumber);
   }
 
-  const windowsDeviceNode = new WindowsDeviceNode({
+  const windowsDeviceNode = new DesktopNode({
     passcode,
     discriminator,
     serialNumber,

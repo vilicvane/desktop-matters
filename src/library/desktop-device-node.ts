@@ -3,9 +3,9 @@ import {CommissioningServer} from '@project-chip/matter.js';
 import {DeviceTypeId} from '@project-chip/matter.js/datatype';
 
 import {VENDOR_ID, VENDOR_NAME} from './@constants';
-import {WindowsDevice} from './windows-device';
+import {WindowsScreen} from './windows-screen';
 
-export interface WindowsDeviceNodeOptions {
+export interface DesktopNodeOptions {
   name?: string;
   /**
    * 16 bits.
@@ -20,20 +20,20 @@ export interface WindowsDeviceNodeOptions {
   port?: number;
 }
 
-export class WindowsDeviceNode {
-  readonly device: WindowsDevice;
+export class DesktopNode {
+  readonly device: WindowsScreen;
 
   readonly commissioningServer: CommissioningServer;
 
   constructor({
-    name = 'Windows Device',
+    name = 'Desktop',
     productId = 0x0001,
     passcode,
     discriminator,
     serialNumber,
     port = 5540,
-  }: WindowsDeviceNodeOptions) {
-    this.device = new WindowsDevice();
+  }: DesktopNodeOptions) {
+    this.device = new WindowsScreen();
 
     this.commissioningServer = new CommissioningServer({
       port,
@@ -44,8 +44,7 @@ export class WindowsDeviceNode {
       basicInformation: {
         vendorName: VENDOR_NAME,
         vendorId: VENDOR_ID,
-        productName: 'Windows Device',
-        productLabel: 'Windows Device',
+        productName: 'Desktop',
         productId,
         serialNumber,
       },

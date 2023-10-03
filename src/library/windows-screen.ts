@@ -10,7 +10,7 @@ import {isLocked, lock} from 'lock-your-windows';
 
 const LOCKED_CHECKING_INTERVAL = 1000;
 
-export class WindowsDevice extends Device {
+export class WindowsScreen extends Device {
   private lockedCheckingTimer: NodeJS.Timeout | undefined;
 
   constructor() {
