@@ -1,8 +1,8 @@
 import type {MatterServer} from '@project-chip/matter.js';
 import {CommissioningServer} from '@project-chip/matter.js';
-import {DeviceTypeId} from '@project-chip/matter.js/datatype';
+import {Aggregator, DeviceTypes} from '@project-chip/matter.js/device';
 
-import {VENDOR_ID, VENDOR_NAME} from './@constants';
+import {PRODUCT_NAME, TEXTS, VENDOR_ID, VENDOR_NAME} from './@constants';
 import {WindowsScreen} from './windows-screen';
 
 export interface DesktopNodeOptions {
@@ -21,36 +21,50 @@ export interface DesktopNodeOptions {
 }
 
 export class DesktopNode {
-  readonly device: WindowsScreen;
+  readonly aggregator: Aggregator;
 
   readonly commissioningServer: CommissioningServer;
 
   constructor({
-    name = 'Desktop',
+    name = TEXTS['Desktop'],
     productId = 0x0001,
     passcode,
     discriminator,
     serialNumber,
     port = 5540,
   }: DesktopNodeOptions) {
-    this.device = new WindowsScreen();
+    const aggregator = new Aggregator();
 
-    this.commissioningServer = new CommissioningServer({
+    const screen = new WindowsScreen();
+
+    aggregator.addBridgedDevice(screen, {
+      nodeLabel: TEXTS['Screen'],
+      productName: PRODUCT_NAME,
+      vendorName: VENDOR_NAME,
+      vendorId: VENDOR_ID,
+      serialNumber: `${serialNumber}-screen`,
+      reachable: true,
+    });
+
+    const commissioningServer = new CommissioningServer({
       port,
       deviceName: name,
-      deviceType: DeviceTypeId(this.device.deviceType),
+      deviceType: DeviceTypes.AGGREGATOR.code,
       passcode,
       discriminator,
       basicInformation: {
         vendorName: VENDOR_NAME,
         vendorId: VENDOR_ID,
-        productName: 'Desktop',
+        productName: PRODUCT_NAME,
         productId,
         serialNumber,
       },
     });
 
-    this.commissioningServer.addDevice(this.device);
+    commissioningServer.addDevice(aggregator);
+
+    this.aggregator = aggregator;
+    this.commissioningServer = commissioningServer;
   }
 
   addToMatterServer(matterServer: MatterServer): void {

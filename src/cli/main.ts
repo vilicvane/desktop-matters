@@ -36,39 +36,41 @@ main(async () => {
 
   const matterServer = new MatterServer(storageManager);
 
-  const desktopDeviceContext = storageManager.createContext('desktop-device');
+  const desktopNodeContext = storageManager.createContext('desktop-node');
 
-  const passcode = desktopDeviceContext.get('passcode', generatePassCode());
-  const discriminator = desktopDeviceContext.get(
+  const passcode = desktopNodeContext.get('passcode', generatePassCode());
+  const discriminator = desktopNodeContext.get(
     'discriminator',
     generateDiscriminator(),
   );
-  const serialNumber = desktopDeviceContext.get(
+  const serialNumber = desktopNodeContext.get(
     'serialNumber',
     generateSerialNumber('desktop'),
   );
 
   if (
-    !desktopDeviceContext.has('passcode') ||
-    !desktopDeviceContext.has('discriminator') ||
-    !desktopDeviceContext.has('serialNumber')
+    !desktopNodeContext.has('passcode') ||
+    !desktopNodeContext.has('discriminator') ||
+    !desktopNodeContext.has('serialNumber')
   ) {
-    desktopDeviceContext.set('passcode', passcode);
-    desktopDeviceContext.set('discriminator', discriminator);
-    desktopDeviceContext.set('serialNumber', serialNumber);
+    desktopNodeContext.set('passcode', passcode);
+    desktopNodeContext.set('discriminator', discriminator);
+    desktopNodeContext.set('serialNumber', serialNumber);
   }
 
-  const windowsDeviceNode = new DesktopNode({
+  const desktopNode = new DesktopNode({
     passcode,
     discriminator,
     serialNumber,
   });
 
-  await windowsDeviceNode.addToMatterServer(matterServer);
+  await desktopNode.addToMatterServer(matterServer);
 
   await matterServer.start();
 
-  windowsDeviceNode.printPairingCodeIfNotPaired();
+  desktopNode.printPairingCodeIfNotPaired();
+
+  desktopNode.commissioningServer.updateStructure();
 
   await SIGNAL('SIGINT');
 
