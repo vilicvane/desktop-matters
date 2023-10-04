@@ -5,7 +5,6 @@ import {setTimeout} from 'timers/promises';
 import '@project-chip/matter-node.js';
 
 import {StorageBackendDisk} from '@project-chip/matter-node.js/storage';
-import {hasParameter} from '@project-chip/matter-node.js/util';
 import {MatterServer} from '@project-chip/matter.js';
 import {Level, Logger} from '@project-chip/matter.js/log';
 import {StorageManager} from '@project-chip/matter.js/storage';
@@ -19,17 +18,19 @@ import {
   generateSerialNumber,
 } from '../library';
 
+import {TEXTS} from './@constants';
+
 Logger.defaultLogLevel = Level.INFO;
 
-main(async () => {
-  const toClearStorage = hasParameter('clearstorage');
+main(async args => {
+  const toClearStorage = args.includes('--clear-storage');
 
   if (toClearStorage) {
-    console.info('Will clear storage in 3 seconds...');
+    console.info(TEXTS['will clear storage in 3s']);
     await setTimeout(3000);
   }
 
-  const storage = new StorageBackendDisk('.storage', toClearStorage);
+  const storage = new StorageBackendDisk('.desktop-matters', toClearStorage);
 
   const storageManager = new StorageManager(storage);
 
@@ -75,9 +76,9 @@ main(async () => {
 
   const run = await StartupRun.create('desktop-matters');
 
-  if (hasParameter('disableautostart')) {
+  if (args.includes('--disable-auto-start')) {
     await run.disable();
-  } else if (hasParameter('autostart')) {
+  } else if (args.includes('--auto-start')) {
     await run.enable();
   }
 
