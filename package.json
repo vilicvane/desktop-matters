@@ -10,7 +10,7 @@
   },
   "bin": "./bld/cli/main.js",
   "scripts": {
-    "desktop-matters": "./bld/cli/main.js",
+    "desktop-matters": "node ./bld/cli/main.js",
     "3": "pnpm install && pnpm dedupe && pnpm install",
     "build": "rimraf ./bld && tsc --build",
     "lint": "eslint --no-error-on-unmatched-pattern . && run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern .",
