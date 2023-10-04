@@ -10,6 +10,7 @@ import {MatterServer} from '@project-chip/matter.js';
 import {Level, Logger} from '@project-chip/matter.js/log';
 import {StorageManager} from '@project-chip/matter.js/storage';
 import main, {SIGNAL} from 'main-function';
+import {StartupRun} from 'startup-run';
 
 import {
   DesktopNode,
@@ -71,6 +72,14 @@ main(async () => {
   desktopNode.printPairingCodeIfNotPaired();
 
   desktopNode.commissioningServer.updateStructure();
+
+  const run = await StartupRun.create('desktop-matters');
+
+  if (hasParameter('disableautostart')) {
+    await run.disable();
+  } else if (hasParameter('autostart')) {
+    await run.enable();
+  }
 
   await SIGNAL('SIGINT');
 
