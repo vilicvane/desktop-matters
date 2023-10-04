@@ -8,10 +8,7 @@
     "require": "./bld/library/index.js",
     "default": "./bld/library/index.js"
   },
-  "bin": {
-    "desktop-matters": "./bld/cli/main.js",
-    "desktop-matters-daemon": "./bld/cli/daemon.js"
-  },
+  "bin": "./bld/cli/main.js",
   "scripts": {
     "3": "pnpm install && pnpm dedupe && pnpm install",
     "build": "rimraf ./bld && tsc --build",
