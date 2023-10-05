@@ -18,8 +18,8 @@
     "test": "pnpm lint-prettier && pnpm build && pnpm lint"
   },
   "dependencies": {
-    "@project-chip/matter-node.js": "^0.5.0",
-    "@project-chip/matter.js": "^0.5.0",
+    "@project-chip/matter-node.js": "0.5.1-alpha.0-20231005-d8f807e",
+    "@project-chip/matter.js": "0.5.1-alpha.0-20231005-d8f807e",
     "lock-your-windows": "^0.0.2",
     "main-function": "^0.1.7",
     "startup-run": "^0.0.2",
@@ -34,10 +34,5 @@
     "rimraf": "^5.0.5",
     "run-in-every": "^0.2.0",
     "typescript": "^5.2.2"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "@project-chip/matter-node.js@0.5.0": "patches/@project-chip__matter-node.js@0.5.0.patch"
-    }
   }
 }
