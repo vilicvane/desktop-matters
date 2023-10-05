@@ -1,6 +1,6 @@
 {
   "name": "desktop-matters",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Add your desktop computer as Matter devices.",
   "repository": "https://github.com/vilic/desktop-matters.git",
   "license": "MIT",
@@ -12,8 +12,8 @@
   },
   "bin": "./bld/cli/main.js",
   "scripts": {
-    "desktop-matters": "node ./bld/cli/main.js",
     "3": "pnpm install && pnpm dedupe && pnpm install",
+    "desktop-matters": "node ./bld/cli/main.js",
     "build": "rimraf ./bld && tsc --build",
     "lint": "eslint --no-error-on-unmatched-pattern . && run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern .",
     "lint-prettier": "prettier --check .",
