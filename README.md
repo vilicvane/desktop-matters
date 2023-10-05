@@ -6,6 +6,43 @@
 
 Add your desktop computer as Matter devices.
 
+https://github.com/vilic/desktop-matters/assets/970430/ddc091ea-9b16-49d8-b7e3-498de8ace73c
+
+## Platforms
+
+Currently Windows-only.
+
+## Features
+
+- Add desktop screen as an `ON_OFF_LIGHT` device to lock (turn off).
+
+## Installation
+
+```bash
+npm install --global desktop-matters
+```
+
+## Usage
+
+Start the device and pair:
+
+```bash
+desktop-matters
+```
+
+Reset the device (currently required before re-pairing):
+
+```bash
+desktop-matters --reset
+```
+
+Enable/disable auto start:
+
+```bash
+desktop-matters --auto-start
+desktop-matters --disable-auto-start
+```
+
 ## License
 
 MIT License.
