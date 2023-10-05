@@ -23,14 +23,14 @@ import {TEXTS} from './@constants';
 Logger.defaultLogLevel = Level.INFO;
 
 main(async args => {
-  const toClearStorage = args.includes('--clear-storage');
+  const toReset = args.includes('--reset');
 
-  if (toClearStorage) {
+  if (toReset) {
     console.info(TEXTS['will clear storage in 3s']);
     await setTimeout(3000);
   }
 
-  const storage = new StorageBackendDisk('.desktop-matters', toClearStorage);
+  const storage = new StorageBackendDisk('.desktop-matters', toReset);
 
   const storageManager = new StorageManager(storage);
 
