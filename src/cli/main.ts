@@ -23,6 +23,22 @@ import {TEXTS} from './@constants';
 Logger.defaultLogLevel = Level.INFO;
 
 main(async args => {
+  if (!StartupRun.daemonSpawned) {
+    const run = await StartupRun.create('desktop-matters');
+
+    if (args.includes('--auto-start')) {
+      await run.enable();
+
+      run.start();
+
+      return;
+    } else if (args.includes('--disable-auto-start')) {
+      await run.disable();
+
+      return;
+    }
+  }
+
   const toReset = args.includes('--reset');
 
   if (toReset) {
@@ -73,14 +89,6 @@ main(async args => {
   desktopNode.printPairingCodeIfNotPaired();
 
   desktopNode.commissioningServer.updateStructure();
-
-  const run = await StartupRun.create('desktop-matters');
-
-  if (args.includes('--disable-auto-start')) {
-    await run.disable();
-  } else if (args.includes('--auto-start')) {
-    await run.enable();
-  }
 
   await SIGNAL('SIGINT');
 

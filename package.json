@@ -24,7 +24,7 @@
     "@project-chip/matter.js": "0.5.1-alpha.0-20231005-d8f807e",
     "lock-your-windows": "^0.0.2",
     "main-function": "^0.1.7",
-    "startup-run": "^0.0.2",
+    "startup-run": "^0.0.3",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
