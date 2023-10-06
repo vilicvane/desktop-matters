@@ -23,21 +23,12 @@ import {TEXTS} from './@constants';
 Logger.defaultLogLevel = Level.INFO;
 
 main(async args => {
-  if (!StartupRun.daemonSpawned) {
-    const run = await StartupRun.create('desktop-matters');
+  const run = StartupRun.create('desktop-matters');
 
-    if (args.includes('--startup')) {
-      await run.enable();
-
-      run.start();
-
-      return;
-    } else if (args.includes('--disable-startup')) {
-      await run.disable();
-
-      return;
-    }
-  }
+  run.setup({
+    enable: args.includes('--startup'),
+    disable: args.includes('--disable-startup'),
+  });
 
   const toReset = args.includes('--reset');
 
