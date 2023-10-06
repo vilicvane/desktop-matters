@@ -25,7 +25,7 @@ Logger.defaultLogLevel = Level.INFO;
 main(async args => {
   const run = StartupRun.create('desktop-matters');
 
-  run.setup({
+  await run.setup({
     enable: args.includes('--startup'),
     disable: args.includes('--disable-startup'),
   });
