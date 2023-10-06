@@ -26,13 +26,13 @@ main(async args => {
   if (!StartupRun.daemonSpawned) {
     const run = await StartupRun.create('desktop-matters');
 
-    if (args.includes('--auto-start')) {
+    if (args.includes('--startup')) {
       await run.enable();
 
       run.start();
 
       return;
-    } else if (args.includes('--disable-auto-start')) {
+    } else if (args.includes('--disable-startup')) {
       await run.disable();
 
       return;

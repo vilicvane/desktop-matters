@@ -36,11 +36,11 @@ Reset the device (currently required before re-pairing):
 desktop-matters --reset
 ```
 
-Enable/disable auto start:
+Enable/disable startup:
 
 ```bash
-desktop-matters --auto-start
-desktop-matters --disable-auto-start
+desktop-matters --startup
+desktop-matters --disable-startup
 ```
 
 ## License
