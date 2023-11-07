@@ -1,3 +1,3 @@
-export * from './desktop-node';
-export * from './windows-screen';
-export * from './utils';
+export * from './desktop-node.js';
+export * from './windows-screen.js';
+export * from './utils.js';

@@ -5,9 +5,9 @@
   "repository": "https://github.com/vilic/desktop-matters.git",
   "license": "MIT",
   "author": "vilicvane",
+  "type": "module",
   "exports": {
     "types": "./bld/library/index.d.ts",
-    "require": "./bld/library/index.js",
     "default": "./bld/library/index.js"
   },
   "bin": "./bld/cli/main.js",
@@ -15,7 +15,7 @@
     "3": "pnpm install && pnpm dedupe && pnpm install",
     "desktop-matters": "node ./bld/cli/main.js",
     "build": "rimraf ./bld && tsc --build",
-    "lint": "eslint --no-error-on-unmatched-pattern . && run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern .",
+    "lint": "eslint --no-error-on-unmatched-pattern --report-unused-disable-directives . && run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern --report-unused-disable-directives .",
     "lint-prettier": "prettier --check .",
     "test": "pnpm lint-prettier && pnpm build && pnpm lint"
   },
@@ -28,10 +28,9 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@mufan/code": "^0.2.17",
-    "@mufan/eslint-plugin": "^0.1.82",
+    "@mufan/eslint-plugin": "^0.2.14",
     "@types/node": "^20.8.0",
-    "eslint": "^8.50.0",
+    "eslint": "^8.53.0",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
     "run-in-every": "^0.2.0",

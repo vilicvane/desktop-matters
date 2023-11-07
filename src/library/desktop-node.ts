@@ -2,10 +2,10 @@ import type {MatterServer} from '@project-chip/matter.js';
 import {CommissioningServer} from '@project-chip/matter.js';
 import {Aggregator, DeviceTypes} from '@project-chip/matter.js/device';
 
-import {PRODUCT_NAME, TEXTS, VENDOR_ID, VENDOR_NAME} from './@constants';
-import {WindowsScreen} from './windows-screen';
+import {PRODUCT_NAME, TEXTS, VENDOR_ID, VENDOR_NAME} from './@constants.js';
+import {WindowsScreen} from './windows-screen.js';
 
-export interface DesktopNodeOptions {
+export type DesktopNodeOptions = {
   name?: string;
   /**
    * 16 bits.
@@ -18,7 +18,7 @@ export interface DesktopNodeOptions {
   discriminator: number;
   serialNumber: string;
   port?: number;
-}
+};
 
 export class DesktopNode {
   readonly aggregator: Aggregator;

@@ -8,7 +8,7 @@ import {StorageBackendDisk} from '@project-chip/matter-node.js/storage';
 import {MatterServer} from '@project-chip/matter.js';
 import {Level, Logger} from '@project-chip/matter.js/log';
 import {StorageManager} from '@project-chip/matter.js/storage';
-import main, {SIGNAL} from 'main-function';
+import {SIGNAL, main} from 'main-function';
 import {StartupRun} from 'startup-run';
 
 import {
@@ -16,9 +16,9 @@ import {
   generateDiscriminator,
   generatePassCode,
   generateSerialNumber,
-} from '../library';
+} from '../library/index.js';
 
-import {TEXTS} from './@constants';
+import {TEXTS} from './@constants.js';
 
 Logger.defaultLogLevel = Level.INFO;
 
