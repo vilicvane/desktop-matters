@@ -1,6 +1,6 @@
 {
   "name": "desktop-matters",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Add your desktop computer as Matter devices.",
   "repository": "https://github.com/vilic/desktop-matters.git",
   "license": "MIT",
